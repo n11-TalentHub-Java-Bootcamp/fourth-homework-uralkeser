@@ -26,4 +26,6 @@ public class ClientService {
         clientDao.deleteById(clientId);
     }
 
+    public List<Client> getClientByUserName(String userName){ return clientDao.findClientByUserName(userName);}
+
 }

@@ -14,8 +14,8 @@ public interface ClientConverter {
 
     ClientConverter INSTANCE = Mappers.getMapper(ClientConverter.class);
 
-    List<ClientDto> convertAllClientListToClientDtoList (List<Client> clientList);
+    List<ClientDto> convertClientListToClientDtoList (List<Client> clientList);
 
-    Client convertAllClientDtoListToClientList(ClientDto clientDto);
+    Client convertClientDtoToClient(ClientDto clientDto);
 
 }

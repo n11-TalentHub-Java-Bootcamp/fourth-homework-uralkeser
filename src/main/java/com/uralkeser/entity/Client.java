@@ -7,21 +7,21 @@ import javax.persistence.*;
 @Table(name = "client")
 public class Client {
 
-    @SequenceGenerator(name = "generator")
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private Long id;
 
     @Column(name = "full_name", nullable = false, length = 50)
     private String fullName;
 
-    @Column(name = "user_name", nullable = false, length = 50)
+    @Column(name = "user_name", nullable = false, length = 50, unique = true)
     private String userName;
 
-    @Column(name = "e_mail", nullable = false, length = 50)
+    @Column(name = "e_mail", nullable = false, length = 50, unique = true)
     private String email;
 
-    @Column(name = "mobile_number", nullable = false, length = 15)
+    @Column(name = "mobile_number", nullable = false, length = 15, unique = true)
     private String mobileNumber;
 
     @Override

@@ -2,19 +2,11 @@ package com.uralkeser.dto;
 
 public class ClientDto {
 
-    private Long id;
     private String fullName;
     private String userName;
     private String email;
     private String mobileNumber;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFullName() {
         return fullName;
@@ -48,8 +40,7 @@ public class ClientDto {
         this.mobileNumber = mobileNumber;
     }
 
-    public ClientDto(Long id, String fullName, String userName, String email, String mobileNumber) {
-        this.id = id;
+    public ClientDto(String fullName, String userName, String email, String mobileNumber) {
         this.fullName = fullName;
         this.userName = userName;
         this.email = email;
@@ -59,7 +50,6 @@ public class ClientDto {
     @Override
     public String toString() {
         return "Client{" +
-                "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
