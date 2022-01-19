@@ -18,5 +18,7 @@ public interface DebtConverter {
     @Mapping(source="clientId", target = "client.id")
     Debt convertDebtDtoToDebt(DebtDto debtDto);
 
+    @Mapping(target="clientId", source = "client.id")
+    DebtDto convertDebtToDebtDto(Debt debt);
 
 }

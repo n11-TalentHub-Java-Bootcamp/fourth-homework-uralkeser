@@ -20,4 +20,7 @@ public interface PaymentConverter {
 
     @Mapping( target="debt.id", source="debtId")
     Payment convertPaymentDtoToPayment(PaymentDto paymentDto);
+
+    @Mapping( source="debt.id", target="debtId")
+    PaymentDto convertPaymentToPaymentDto(Payment payment);
 }
