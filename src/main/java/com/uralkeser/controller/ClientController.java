@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class ClientController {
     ClientService clientService;
 
     @GetMapping()
+    @Transactional
     public List<ClientDto> getAll(){
        List<Client> clientList;
 
@@ -33,6 +36,7 @@ public class ClientController {
     }
 
     @PostMapping()
+    @Transactional
     public ResponseEntity<Object> save(@RequestBody ClientDto clientDto){
 
         Client client = ClientConverter.INSTANCE.convertClientDtoToClient(clientDto);
@@ -49,11 +53,13 @@ public class ClientController {
     }
 
     @DeleteMapping("{id}")
+    @Transactional
     public void delete(@PathVariable Long id){
         clientService.deleteClientById(id);
     }
 
     @PutMapping()
+    @Transactional
     public ResponseEntity<Object> update(@RequestBody ClientDto clientDto){
         Client client = ClientConverter.INSTANCE.convertClientDtoToClient(clientDto);
         List<Client> clientList = clientService.getClientByUserName(client.getUserName());

@@ -6,18 +6,17 @@ import com.uralkeser.entity.Debt;
 import com.uralkeser.service.DebtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("api/debts")
@@ -27,6 +26,7 @@ public class DebtController {
     DebtService debtService;
 
     @PostMapping()//3.a
+    @Transactional
     public ResponseEntity<Object> save(@RequestBody DebtDto debtDto){
 
         Debt debt = DebtConverter.INTANCE.convertDebtDtoToDebt(debtDto);
@@ -49,6 +49,7 @@ public class DebtController {
     }
 
     @GetMapping({"/between/{startDate}/and/{endDate}"})//3.d
+    @Transactional
     public List<DebtDto> getAllDebtsByTimePeriod(@PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate){
 
         List<Debt> debtList;
@@ -61,6 +62,7 @@ public class DebtController {
     }
 
     @GetMapping("{clientId}")//3.e
+    @Transactional
     public List<DebtDto> getAlDebtsOfAClient(@PathVariable Long clientId){
         List<Debt> debtList;
 
@@ -73,6 +75,7 @@ public class DebtController {
     }
 
     @GetMapping("/overdue/{clientId}")//3.f
+    @Transactional
     public List<DebtDto> getOverdueDebtsOfAClient(@PathVariable Long clientId) {
         List<Debt> debtList;
         Date today = new Date();
@@ -85,6 +88,7 @@ public class DebtController {
     }
 
     @GetMapping("/totalDebtAmount/{clientId}")//3.g
+    @Transactional
     public BigDecimal getTotalDebtAmountOfAClient(@PathVariable Long clientId){
         List<Debt> debtList;
         BigDecimal total = new BigDecimal(0);
@@ -120,6 +124,7 @@ public class DebtController {
     }
 
     @GetMapping("/totalOverdueDebtAmount/{clientId}")//3.h
+    @Transactional
     public BigDecimal getTotalOverdueDebtAmountOfAClient(@PathVariable Long clientId){
         List<Debt> debtList;
         BigDecimal total = new BigDecimal(0);
@@ -153,6 +158,7 @@ public class DebtController {
     }
 
     @GetMapping("/onlyOverdueDebtAmount/{clientId}")//3.i
+    @Transactional
     public BigDecimal getOnlyOverdueDebtAmountOfAClient(@PathVariable Long clientId){
         List<Debt> debtList;
         BigDecimal total = new BigDecimal(0);
