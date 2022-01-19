@@ -23,7 +23,7 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
-    @GetMapping()
+    @GetMapping()//1.d
     public List<ClientDto> getAll(){
        List<Client> clientList;
 
@@ -34,7 +34,7 @@ public class ClientController {
        return clientDtoList;
     }
 
-    @PostMapping()
+    @PostMapping()//1.a
     public ResponseEntity<Object> save(@RequestBody ClientDto clientDto){
 
         Client client = ClientConverter.INSTANCE.convertClientDtoToClient(clientDto);
@@ -50,12 +50,12 @@ public class ClientController {
         return ResponseEntity.created(uri).build();
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{id}")//1.b
     public void delete(@PathVariable Long id){
         clientService.deleteClientById(id);
     }
 
-    @PutMapping()
+    @PutMapping()//1.c
     public ResponseEntity<Object> update(@RequestBody ClientDto clientDto){
         Client client = ClientConverter.INSTANCE.convertClientDtoToClient(clientDto);
         List<Client> clientList = clientService.getClientByUserName(client.getUserName());

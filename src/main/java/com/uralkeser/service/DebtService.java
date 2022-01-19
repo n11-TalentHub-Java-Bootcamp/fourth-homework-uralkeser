@@ -25,4 +25,10 @@ public class DebtService {
 
     @Transactional
     public List<Debt> getOverdueDebtsOfAClient(Long clientId, Date today){ return debtDao.findOverdueDebtsOfAClient(clientId, today);}
+
+    @Transactional
+    public List<Debt> getAllById(Long id){return debtDao.findAllById(id);}
+
+    public List<Debt> getPaidLateDebtByClient(Long clientId){return debtDao.findAllByClientIdAndType(clientId,"GECIKME_ZAMMI");}
+
 }
