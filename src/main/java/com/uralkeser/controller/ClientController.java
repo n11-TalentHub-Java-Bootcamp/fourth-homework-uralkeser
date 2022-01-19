@@ -24,7 +24,6 @@ public class ClientController {
     ClientService clientService;
 
     @GetMapping()
-    @Transactional
     public List<ClientDto> getAll(){
        List<Client> clientList;
 
@@ -36,7 +35,6 @@ public class ClientController {
     }
 
     @PostMapping()
-    @Transactional
     public ResponseEntity<Object> save(@RequestBody ClientDto clientDto){
 
         Client client = ClientConverter.INSTANCE.convertClientDtoToClient(clientDto);
@@ -53,13 +51,11 @@ public class ClientController {
     }
 
     @DeleteMapping("{id}")
-    @Transactional
     public void delete(@PathVariable Long id){
         clientService.deleteClientById(id);
     }
 
     @PutMapping()
-    @Transactional
     public ResponseEntity<Object> update(@RequestBody ClientDto clientDto){
         Client client = ClientConverter.INSTANCE.convertClientDtoToClient(clientDto);
         List<Client> clientList = clientService.getClientByUserName(client.getUserName());
@@ -67,7 +63,7 @@ public class ClientController {
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         else{
             client.setId(clientList.get(0).getId());
-//            client = clientService.saveClient(client);
+            client = clientService.saveClient(client);
 
             URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest()

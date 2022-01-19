@@ -27,7 +27,6 @@ public class PaymentController {
     PaymentService paymentService;
 
     @PostMapping()
-    @Transactional
     public ResponseEntity<Object> save(@RequestBody PaymentDto paymentDto){
         Payment payment = PaymentConverter.INTANCE.convertPaymentDtoToPayment(paymentDto);
 
@@ -43,7 +42,6 @@ public class PaymentController {
     }
 
     @GetMapping({"/between/{startDate}/and/{endDate}"})
-    @Transactional
     public List<PaymentDto> getAllPaymentsByTimePeriod(@PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
         List<Payment> paymentList;
 
@@ -55,7 +53,6 @@ public class PaymentController {
     }
 
     @GetMapping("{clientId}")
-    @Transactional
     public List<PaymentDto> getAlDebtsOfAClient(@PathVariable Long clientId){
         List<Payment> paymentList;
 
