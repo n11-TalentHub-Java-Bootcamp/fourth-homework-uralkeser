@@ -32,7 +32,7 @@ public class PaymentController {
     @Autowired
     DebtService debtService;
 
-    @PostMapping()
+    @PostMapping()//4.a
     public ResponseEntity<Object> save(@RequestBody PaymentDto paymentDto){
         Payment payment = PaymentConverter.INTANCE.convertPaymentDtoToPayment(paymentDto);
         List<Debt> debtList;
@@ -59,6 +59,7 @@ public class PaymentController {
             lateDebt.setType("GECIKME_ZAMMI");
             lateDebt.setPrincipalDebt(debt);
             lateDebt.setClient(debt.getClient());
+            lateDebt = debtService.saveDebt(lateDebt);
         }
 
         debt.setRemaining(new BigDecimal(0));
@@ -75,7 +76,7 @@ public class PaymentController {
 
     }
 
-    @GetMapping({"/between/{startDate}/and/{endDate}"})
+    @GetMapping({"/between/{startDate}/and/{endDate}"})//4.b
     public List<PaymentDto> getAllPaymentsByTimePeriod(@PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate, @PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
         List<Payment> paymentList;
 
@@ -86,8 +87,8 @@ public class PaymentController {
         return paymentDtoList;
     }
 
-    @GetMapping("{clientId}")
-    public List<PaymentDto> getAlDebtsOfAClient(@PathVariable Long clientId){
+    @GetMapping("{clientId}")//4.c
+    public List<PaymentDto> getAllPaymentsOfAClient(@PathVariable Long clientId){
         List<Payment> paymentList;
 
         paymentList = paymentService.getAllPaymentsByClient(clientId);

@@ -183,7 +183,7 @@ public class DebtController {
         return total;
     }
 
-    @GetMapping("/PaidLateDebt/{clientId}")//4.d
+    @GetMapping("/paidLateDebt/{clientId}")//4.d
     public List<DebtDto> getPaidLateDebt(@PathVariable Long clientId){
 
         List<Debt> debtList;
