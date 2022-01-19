@@ -16,11 +16,15 @@ public class Debt {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "amount", precision = 19, scale = 2)
+    @Column(name = "amount", precision = 19, scale = 2, updatable = false)
     private BigDecimal amount;
 
     @Column(name = "remaning", precision = 19, scale = 2)
     private BigDecimal remaining;
+
+    @Column(name = "start_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
 
     @Column(name = "maturity_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -45,11 +49,12 @@ public class Debt {
         return "Debt{" +
                 "id=" + id +
                 ", amount=" + amount +
-                ", remaning=" + remaining +
+                ", remaining=" + remaining +
+                ", startDate=" + startDate +
                 ", maturityDate=" + maturityDate +
                 ", type='" + type + '\'' +
-                ", principalDebtId=" + principalDebt +
-                ", client_id=" + client +
+                ", principalDebt=" + principalDebt +
+                ", client=" + client +
                 '}';
     }
 }

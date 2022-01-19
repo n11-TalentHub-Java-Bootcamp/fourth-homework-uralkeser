@@ -17,7 +17,7 @@ public class ClientService {
         return clientDao.findAll();
     }
 
-    //can be used for both update and insert operations
+    //can be used for update and insert operations both
     public Client saveClient(Client client){
         return clientDao.save(client);
     }

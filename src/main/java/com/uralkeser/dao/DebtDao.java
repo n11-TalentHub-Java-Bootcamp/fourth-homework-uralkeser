@@ -13,8 +13,14 @@ public interface DebtDao extends JpaRepository<Debt,Long> {
 
     List<Debt> findAll();
 
-    @Query("select debt from Debt debt where debt.client.id = :clientId and debt.remaining > 0")
-    List<Debt> findAllByClientId(Long clientId); //E
+    @Query("SELECT debt FROM Debt debt WHERE debt.client.id = :clientId AND debt.remaining > 0")
+    List<Debt> findAllByClientId(Long clientId);
+
+    @Query("SELECT debt FROM Debt debt WHERE debt.startDate BETWEEN :startTime AND :endTime AND debt.remaining > 0")
+    List<Debt> findAllDebtsByTimePeriod(Date startTime, Date endTime);
+
+    @Query("SELECT debt FROM Debt debt WHERE debt.client.id = :clientId AND debt.maturityDate < :today AND debt.remaining > 0")
+    List<Debt> findOverdueDebtsOfAClient(Long clientId, Date today);
 
 
 

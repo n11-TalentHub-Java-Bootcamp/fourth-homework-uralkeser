@@ -22,7 +22,7 @@ public class ClientController {
     ClientService clientService;
 
     @GetMapping()
-    public List<ClientDto> findAll(){
+    public List<ClientDto> getAll(){
        List<Client> clientList;
 
        clientList = clientService.getAllClients();
